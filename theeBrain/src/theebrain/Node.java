@@ -20,9 +20,41 @@ import org.graphstream.graph.Graph;
 public class Node implements org.graphstream.graph.Node{
 
     //Nodos
+    String Nombre;
     Node Actual;
     Node Siguiente;
-    
+
+    public Node() {
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public Node getActual() {
+        return Actual;
+    }
+
+    public void setActual(Node Actual) {
+        this.Actual = Actual;
+    }
+
+    public Node getSiguiente() {
+        return Siguiente;
+    }
+
+    public void setSiguiente(Node Siguiente) {
+        this.Siguiente = Siguiente;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" + "Nombre=" + Nombre + ", Actual=" + Actual + ", Siguiente=" + Siguiente + '}';
+    }
     
     @Override
     public Graph getGraph() {
