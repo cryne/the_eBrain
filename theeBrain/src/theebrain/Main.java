@@ -452,13 +452,6 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_GrafoDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_GrafoDialogMouseClicked
 
-        jd_Grafo.setLocationRelativeTo(this);
-        jd_Grafo.pack();
-        jd_Grafo.setVisible(true);
-
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-
-
     }//GEN-LAST:event_jb_GrafoDialogMouseClicked
 
     private void tf_nodo_actualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nodo_actualActionPerformed
