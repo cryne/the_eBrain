@@ -1,4 +1,5 @@
 package theebrain;
+
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -7,13 +8,11 @@ import org.graphstream.graph.implementations.SingleGraph;
 
 public class Main extends javax.swing.JFrame {
 
-    
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        System.out.println("hola");
     }
 
     /**
@@ -39,19 +38,21 @@ public class Main extends javax.swing.JFrame {
         tf_race = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_obs = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
+        bt_registrar = new javax.swing.JButton();
         jdc_born = new com.toedter.calendar.JDateChooser();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         genero = new javax.swing.ButtonGroup();
-        mapa = new javax.swing.JDialog();
+        arbol = new javax.swing.JDialog();
         tf_nodo_actual = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        bt_agregar_hijo = new javax.swing.JButton();
         cbx_agregar_hijos = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        bt_cambiar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
         cbx_cambio_nodo = new javax.swing.JComboBox<>();
         jDialog1 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
@@ -60,11 +61,13 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jDialog2 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        b_mapa = new javax.swing.JButton();
-        b_arbol = new javax.swing.JButton();
+        bt_registrar_perfil = new javax.swing.JButton();
+        bt_mapa_mental = new javax.swing.JButton();
+        bt_crear_arbol = new javax.swing.JButton();
         cbx_perfiles = new javax.swing.JComboBox<>();
         cbx_treehead = new javax.swing.JComboBox<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setText("Registro de Perfiles");
@@ -97,59 +100,64 @@ public class Main extends javax.swing.JFrame {
         ta_obs.setRows(5);
         jScrollPane1.setViewportView(ta_obs);
 
-        jButton4.setText("Registrar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_registrar.setText("Registrar");
+        bt_registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                bt_registrarMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bt_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bt_registrarActionPerformed(evt);
             }
         });
+
+        jMenuBar2.add(jMenu1);
+        jMenuBar2.add(jMenu3);
+
+        registro.setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout registroLayout = new javax.swing.GroupLayout(registro.getContentPane());
         registro.getContentPane().setLayout(registroLayout);
         registroLayout.setHorizontalGroup(
             registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registroLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registroLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdc_born, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registroLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registroLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registroLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rb_m)
-                        .addGap(12, 12, 12)
-                        .addComponent(rb_f)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rb_x))
-                    .addGroup(registroLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_race, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroLayout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(138, 138, 138))
+            .addGroup(registroLayout.createSequentialGroup()
                 .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(138, 138, 138))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroLayout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(205, 205, 205))))
+                    .addGroup(registroLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(registroLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdc_born, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(registroLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(registroLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(registroLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rb_m)
+                                .addGap(12, 12, 12)
+                                .addComponent(rb_f)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rb_x))
+                            .addGroup(registroLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_race, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(registroLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(bt_registrar)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         registroLayout.setVerticalGroup(
             registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,28 +182,28 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tf_race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(29, 29, 29)
                 .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(bt_registrar)
+                .addGap(19, 19, 19))
         );
 
         tf_nodo_actual.setEnabled(false);
 
-        jButton2.setText("Agregar Hijo:");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_agregar_hijo.setText("Agregar Hijo:");
+        bt_agregar_hijo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                bt_agregar_hijoMouseClicked(evt);
             }
         });
 
-        jButton3.setText("Cambiar");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_cambiar.setText("Cambiar");
+        bt_cambiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                bt_cambiarMouseClicked(evt);
             }
         });
 
@@ -203,71 +211,63 @@ public class Main extends javax.swing.JFrame {
         jLabel8.setText("Nodo actual");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Administrador de Mapa");
+        jLabel9.setText("Administrador del Arbol");
 
         jLabel10.setText("Ingrese el nodo al que desea cambiar");
 
         jLabel11.setText("selecione el perfil que desea como hijo");
 
-        jButton5.setText("Cerrar");
-
-        javax.swing.GroupLayout mapaLayout = new javax.swing.GroupLayout(mapa.getContentPane());
-        mapa.getContentPane().setLayout(mapaLayout);
-        mapaLayout.setHorizontalGroup(
-            mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mapaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(mapaLayout.createSequentialGroup()
+        javax.swing.GroupLayout arbolLayout = new javax.swing.GroupLayout(arbol.getContentPane());
+        arbol.getContentPane().setLayout(arbolLayout);
+        arbolLayout.setHorizontalGroup(
+            arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arbolLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
+                .addGroup(arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, arbolLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tf_nodo_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
-                        .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, arbolLayout.createSequentialGroup()
+                        .addGroup(arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, arbolLayout.createSequentialGroup()
                                 .addComponent(cbx_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(bt_cambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, arbolLayout.createSequentialGroup()
+                                .addComponent(bt_agregar_hijo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbx_agregar_hijos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, arbolLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel9)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(76, 76, 76))
         );
-        mapaLayout.setVerticalGroup(
-            mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mapaLayout.createSequentialGroup()
+        arbolLayout.setVerticalGroup(
+            arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arbolLayout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(44, 44, 44)
-                .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_nodo_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                .addGroup(arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_agregar_hijo)
                     .addComponent(cbx_agregar_hijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                .addGroup(arbolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_cambiar)
                     .addComponent(cbx_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(109, 109, 109))
         );
 
         jb_Grafo.setText("Ok");
@@ -331,50 +331,52 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel1.setText("The eBrain");
 
-        jButton1.setText("Registrar Perfiles");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_registrar_perfil.setText("Registrar Perfiles");
+        bt_registrar_perfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                bt_registrar_perfilMouseClicked(evt);
             }
         });
 
-        b_mapa.setText("Crear mapas Conceptuales");
-        b_mapa.setEnabled(false);
+        bt_mapa_mental.setText("Crear Mapas Mental");
+        bt_mapa_mental.setEnabled(false);
 
-        b_arbol.setText("Crear arbol genealogico");
-        b_arbol.setEnabled(false);
-        b_arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_crear_arbol.setText("Crear arbol genealogico");
+        bt_crear_arbol.setEnabled(false);
+        bt_crear_arbol.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_arbolMouseClicked(evt);
+                bt_crear_arbolMouseClicked(evt);
             }
         });
-        b_arbol.addActionListener(new java.awt.event.ActionListener() {
+        bt_crear_arbol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_arbolActionPerformed(evt);
+                bt_crear_arbolActionPerformed(evt);
             }
         });
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
+                .addGap(0, 184, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbx_treehead, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(b_mapa))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbx_treehead, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(b_arbol, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_mapa_mental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_crear_arbol, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                 .addGap(190, 190, 190))
             .addGroup(layout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(bt_registrar_perfil))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -383,106 +385,129 @@ public class Main extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addGap(73, 73, 73)
-                .addComponent(jButton1)
+                .addComponent(bt_registrar_perfil)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbx_treehead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(b_arbol))
+                    .addComponent(bt_crear_arbol))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b_mapa)
+                    .addComponent(bt_mapa_mental)
                     .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void bt_registrar_perfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_registrar_perfilMouseClicked
         this.registro.pack();
         this.registro.setModal(true);
         this.setLocationRelativeTo(this);
         this.registro.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_bt_registrar_perfilMouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        String genero="";
-        if(rb_m.isSelected()){
-            genero="Masculino";
-        }else if(rb_f.isSelected()){
-            genero="Femenino";
-        }else{
-            genero="Desconocido";
+    private void bt_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_registrarMouseClicked
+        String genero = "";
+        if (rb_m.isSelected()) {
+            genero = "Masculino";
+        } else if (rb_f.isSelected()) {
+            genero = "Femenino";
+        } else {
+            genero = "Desconocido";
         }
-        Perfil nuevo=new Perfil(tf_name.getText(),jdc_born.toString(),genero,tf_race.getText(),ta_obs.getText());
+        Perfil nuevo = new Perfil(tf_name.getText(), jdc_born.toString(), genero, tf_race.getText(), ta_obs.getText());
         perfiles.add(nuevo);
         tf_name.setText("");
         tf_race.setText("");
         ta_obs.setText("");
-        JOptionPane.showMessageDialog(this,"Perfil registrado exitosamente");
-        b_arbol.setEnabled(true);
-        b_mapa.setEnabled(true);
-        DefaultComboBoxModel modelo1=(DefaultComboBoxModel)cbx_perfiles.getModel();
-        DefaultComboBoxModel modelo2=(DefaultComboBoxModel)cbx_treehead.getModel();
+        JOptionPane.showMessageDialog(this, "Perfil registrado exitosamente");
+        bt_crear_arbol.setEnabled(true);
+        bt_mapa_mental.setEnabled(true);
+        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) cbx_perfiles.getModel();
+        DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cbx_treehead.getModel();
         modelo1.addElement(nuevo);
-        modelo2.addElement(nuevo); 
-        
-    }//GEN-LAST:event_jButton4MouseClicked
+        modelo2.addElement(nuevo);
 
-    private void b_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_arbolActionPerformed
+    }//GEN-LAST:event_bt_registrarMouseClicked
+
+    private void bt_crear_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_crear_arbolActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_b_arbolActionPerformed
+    }//GEN-LAST:event_bt_crear_arbolActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_registrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bt_registrarActionPerformed
 
-    private void b_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_arbolMouseClicked
-        Perfil head=(Perfil)cbx_treehead.getSelectedItem();
-        DefaultComboBoxModel modelo=(DefaultComboBoxModel)cbx_agregar_hijos.getModel();
+    private void bt_crear_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crear_arbolMouseClicked
+        Perfil head = (Perfil) cbx_treehead.getSelectedItem();
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
         for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()!=head.getNombre()) {
+            if (perfiles.get(i).getNombre() != head.getNombre()) {
                 modelo.addElement(perfiles.get(i));
             }
         }
         cbx_agregar_hijos.setModel(modelo);
+        nodo_actual = head;
         tf_nodo_actual.setText(head.getNombre());
-        this.mapa.pack();
-        this.mapa.setModal(true);
+        this.arbol.pack();
+        this.arbol.setModal(true);
         this.setLocationRelativeTo(this);
-        this.mapa.setVisible(true);
-    }//GEN-LAST:event_b_arbolMouseClicked
+        this.arbol.setVisible(true);
+    }//GEN-LAST:event_bt_crear_arbolMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
         // TODO add your handling code here:
-        for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()==tf_nodo_actual.getText()) {
-                perfiles.get(i).getHijos().add((Perfil)cbx_agregar_hijos.getSelectedItem());
-                DefaultComboBoxModel modelo0=(DefaultComboBoxModel)cbx_cambio_nodo.getModel();
-                modelo0.addElement((Perfil)cbx_agregar_hijos.getSelectedItem());
-                cbx_cambio_nodo.setModel(modelo0);
-                cbx_cambio_nodo.setModel(modelo0);
+        if (bt_agregar_hijo.isEnabled()) {
+            for (int i = 0; i < perfiles.size(); i++) {
+                if (perfiles.get(i).getNombre() == nodo_actual.getNombre()) {
+                    Perfil hijo = (Perfil) cbx_agregar_hijos.getSelectedItem();
+                    perfiles.get(i).getHijos().add(hijo);
+                    DefaultComboBoxModel modelo0 = (DefaultComboBoxModel) cbx_cambio_nodo.getModel();
+                    modelo0.addElement((Perfil) cbx_agregar_hijos.getSelectedItem());
+                    cbx_cambio_nodo.setModel(modelo0);
+                    cbx_cambio_nodo.setModel(modelo0);
+                    JOptionPane.showMessageDialog(this, tf_nodo_actual.getText() + " se le ha agregado un nuevo hijo");
+                }
+            }
+            System.out.println("------");
+            for (int i = 0; i < perfiles.size(); i++) {
+                for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
+                    System.out.println(perfiles.get(i).getNombre() + " " + perfiles.get(i).getHijos().get(j).getNombre());
+                }
+            }
+            System.out.println("------");
+            DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
+            modelo.removeElementAt(cbx_agregar_hijos.getSelectedIndex());
+            cbx_agregar_hijos.setModel(modelo);
+            if (cbx_agregar_hijos.getItemCount() == 0) {
+                bt_agregar_hijo.setEnabled(false);
             }
         }
-        DefaultComboBoxModel modelo=(DefaultComboBoxModel)cbx_agregar_hijos.getModel();
-        modelo.removeElementAt(cbx_agregar_hijos.getSelectedIndex());
-        cbx_agregar_hijos.setModel(modelo);
-        JOptionPane.showMessageDialog(this,tf_nodo_actual.getText()+" se le ha agregado un nuevo hijo");
-    }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+
+    }//GEN-LAST:event_bt_agregar_hijoMouseClicked
+
+    private void bt_cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_cambiarMouseClicked
         // TODO add your handling code here:
-        boolean revision=true;
+        boolean revision = true;
+        Perfil nuevo_actual = (Perfil) cbx_cambio_nodo.getSelectedItem();
         for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()==this.cbx_cambio_nodo.toString()) {
-                tf_nodo_actual.setText(perfiles.get(i).getNombre());
-                revision=false;
+            if (perfiles.get(i).getNombre() == nuevo_actual.getNombre()) {
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_cambio_nodo.getModel();
+                modelo.removeElementAt(cbx_cambio_nodo.getSelectedIndex());
+                modelo.addElement(nodo_actual);
+                tf_nodo_actual.setText(nuevo_actual.getNombre());
+                nodo_actual = nuevo_actual;
+                revision = false;
             }
         }
         if (revision) {
-            JOptionPane.showMessageDialog(this,"el nombre que usted ha ingresado no exite o no se encuentra en el arbol");
+            JOptionPane.showMessageDialog(this, "el nombre que usted ha ingresado no exite o no se encuentra en el arbol");
+        } else {
+            JOptionPane.showMessageDialog(this, "el nodo actual ha Cambiado");
         }
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_bt_cambiarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -520,19 +545,19 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_arbol;
-    private javax.swing.JButton b_mapa;
+    private javax.swing.JDialog arbol;
+    private javax.swing.JButton bt_agregar_hijo;
+    private javax.swing.JButton bt_cambiar;
+    private javax.swing.JButton bt_crear_arbol;
+    private javax.swing.JButton bt_mapa_mental;
+    private javax.swing.JButton bt_registrar;
+    private javax.swing.JButton bt_registrar_perfil;
     private javax.swing.JComboBox<String> cb_Perfiles_Grafo;
     private javax.swing.JComboBox<String> cbx_agregar_hijos;
     private javax.swing.JComboBox<String> cbx_cambio_nodo;
     private javax.swing.JComboBox<String> cbx_perfiles;
     private javax.swing.JComboBox<String> cbx_treehead;
     private javax.swing.ButtonGroup genero;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
@@ -547,11 +572,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_Grafo;
     private com.toedter.calendar.JDateChooser jdc_born;
-    private javax.swing.JDialog mapa;
     private javax.swing.JRadioButton rb_f;
     private javax.swing.JRadioButton rb_m;
     private javax.swing.JRadioButton rb_x;
@@ -561,6 +590,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nodo_actual;
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
-ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
-
+ArrayList<Perfil> perfiles = new ArrayList<Perfil>();
+    Perfil nodo_actual;
 }

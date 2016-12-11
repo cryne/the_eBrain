@@ -18,8 +18,8 @@ public class Perfil {
     String Raza;
     String Observaciones;
     
-    ArrayList<Perfil> Hijos;
-    ArrayList<MapaMental> Mapas;
+    ArrayList<Perfil> Hijos=new ArrayList<Perfil>();
+    ArrayList<MapaMental> Mapas=new ArrayList<MapaMental>();
 
     public Perfil(String Nombre, String Fecha_Nacimiento, String Genero, String Raza, String Observaciones) {
         this.Nombre = Nombre;
