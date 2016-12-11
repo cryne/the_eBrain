@@ -1,4 +1,4 @@
-package theebrain;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,8 +21,8 @@ public class Node implements org.graphstream.graph.Node{
 
     //Nodos
     String Nombre;
-    Node Actual;
-    Node Siguiente;
+    Node Current;
+    Node Next;
 
     public Node() {
     }
@@ -36,24 +36,24 @@ public class Node implements org.graphstream.graph.Node{
     }
 
     public Node getActual() {
-        return Actual;
+        return Current;
     }
 
     public void setActual(Node Actual) {
-        this.Actual = Actual;
+        this.Current = Actual;
     }
 
     public Node getSiguiente() {
-        return Siguiente;
+        return Next;
     }
 
     public void setSiguiente(Node Siguiente) {
-        this.Siguiente = Siguiente;
+        this.Next = Siguiente;
     }
 
     @Override
     public String toString() {
-        return "Node{" + "Nombre=" + Nombre + ", Actual=" + Actual + ", Siguiente=" + Siguiente + '}';
+        return "Node{" + "Nombre=" + Nombre + ", Actual=" + Current + ", Siguiente=" + Next + '}';
     }
     
     @Override

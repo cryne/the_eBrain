@@ -20,12 +20,12 @@ class Edge implements org.graphstream.graph.Edge{
 
     int Importancia;
     Node Head;
-    Node Cola;
+    Node Tail;
 
     public Edge(int Importancia, Node Head, Node Cola) {
         this.Importancia = Importancia;
         this.Head = Head;
-        this.Cola = Cola;
+        this.Tail = Cola;
     }
 
     public int getImportancia() {
@@ -45,11 +45,11 @@ class Edge implements org.graphstream.graph.Edge{
     }
 
     public Node getCola() {
-        return Cola;
+        return Tail;
     }
 
     public void setCola(Node Cola) {
-        this.Cola = Cola;
+        this.Tail = Cola;
     }
 
     @Override

@@ -53,18 +53,18 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         cbx_cambio_nodo = new javax.swing.JComboBox<>();
-        jDialog1 = new javax.swing.JDialog();
+        jd_Grafo = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jb_Grafo = new javax.swing.JButton();
         cb_Perfiles_Grafo = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jDialog2 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         b_mapa = new javax.swing.JButton();
         b_arbol = new javax.swing.JButton();
         cbx_perfiles = new javax.swing.JComboBox<>();
         cbx_treehead = new javax.swing.JComboBox<>();
+        jb_GrafoDialog = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setText("Registro de Perfiles");
@@ -302,28 +302,17 @@ public class Main extends javax.swing.JFrame {
                 .addGap(80, 80, 80))
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jd_GrafoLayout = new javax.swing.GroupLayout(jd_Grafo.getContentPane());
+        jd_Grafo.getContentPane().setLayout(jd_GrafoLayout);
+        jd_GrafoLayout.setHorizontalGroup(
+            jd_GrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
+        jd_GrafoLayout.setVerticalGroup(
+            jd_GrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_GrafoLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -340,6 +329,11 @@ public class Main extends javax.swing.JFrame {
 
         b_mapa.setText("Crear mapas Conceptuales");
         b_mapa.setEnabled(false);
+        b_mapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_mapaActionPerformed(evt);
+            }
+        });
 
         b_arbol.setText("Crear arbol genealogico");
         b_arbol.setEnabled(false);
@@ -351,6 +345,13 @@ public class Main extends javax.swing.JFrame {
         b_arbol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_arbolActionPerformed(evt);
+            }
+        });
+
+        jb_GrafoDialog.setText("Grafo");
+        jb_GrafoDialog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_GrafoDialogMouseClicked(evt);
             }
         });
 
@@ -376,6 +377,10 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_GrafoDialog)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +397,9 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b_mapa)
                     .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(jb_GrafoDialog)
+                .addContainerGap())
         );
 
         pack();
@@ -484,6 +491,21 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void b_mapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_mapaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_mapaActionPerformed
+
+    private void jb_GrafoDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_GrafoDialogMouseClicked
+        
+        jd_Grafo.setLocationRelativeTo(this);
+        jd_Grafo.pack();
+        jd_Grafo.setVisible(true);
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        
+    }//GEN-LAST:event_jb_GrafoDialogMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -533,8 +555,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -550,6 +570,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_Grafo;
+    private javax.swing.JButton jb_GrafoDialog;
+    private javax.swing.JDialog jd_Grafo;
     private com.toedter.calendar.JDateChooser jdc_born;
     private javax.swing.JDialog mapa;
     private javax.swing.JRadioButton rb_f;
@@ -563,4 +585,22 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
 
+//Methods
+    public Graph addNodeGrafo(Graph grafo, Node Lista, Node add) {
+        Node temp = Lista;
+        while (temp != null) {
+            grafo.addNode(temp.getNombre());
+            temp = temp.getNext();
+        }
+        return grafo;
+    }
+    
+        public Graph graphAddEdge(Graph grafo, Edge Adj) {
+
+        Edge temp = Adj;
+
+        grafo.addEdge(temp.getImportancia() + "", temp.Head, temp.Tail);
+
+        return grafo;
+    }
 }
