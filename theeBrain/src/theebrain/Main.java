@@ -1,4 +1,5 @@
 package theebrain;
+
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -7,7 +8,6 @@ import org.graphstream.graph.implementations.SingleGraph;
 
 public class Main extends javax.swing.JFrame {
 
-    
     /**
      * Creates new form Main
      */
@@ -53,11 +53,6 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         cbx_cambio_nodo = new javax.swing.JComboBox<>();
-        jd_Grafo = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
-        jb_Grafo = new javax.swing.JButton();
-        cb_Perfiles_Grafo = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         b_mapa = new javax.swing.JButton();
@@ -184,6 +179,11 @@ public class Main extends javax.swing.JFrame {
         );
 
         tf_nodo_actual.setEnabled(false);
+        tf_nodo_actual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nodo_actualActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Agregar Hijo:");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,51 +268,6 @@ public class Main extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
-        );
-
-        jb_Grafo.setText("Ok");
-
-        jLabel12.setText("Perfiles");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(260, 260, 260)
-                        .addComponent(jb_Grafo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_Perfiles_Grafo, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(103, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_Perfiles_Grafo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                .addComponent(jb_Grafo)
-                .addGap(80, 80, 80))
-        );
-
-        javax.swing.GroupLayout jd_GrafoLayout = new javax.swing.GroupLayout(jd_Grafo.getContentPane());
-        jd_Grafo.getContentPane().setLayout(jd_GrafoLayout);
-        jd_GrafoLayout.setHorizontalGroup(
-            jd_GrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jd_GrafoLayout.setVerticalGroup(
-            jd_GrafoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jd_GrafoLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -413,27 +368,27 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        String genero="";
-        if(rb_m.isSelected()){
-            genero="Masculino";
-        }else if(rb_f.isSelected()){
-            genero="Femenino";
-        }else{
-            genero="Desconocido";
+        String genero = "";
+        if (rb_m.isSelected()) {
+            genero = "Masculino";
+        } else if (rb_f.isSelected()) {
+            genero = "Femenino";
+        } else {
+            genero = "Desconocido";
         }
-        Perfil nuevo=new Perfil(tf_name.getText(),jdc_born.toString(),genero,tf_race.getText(),ta_obs.getText());
+        Perfil nuevo = new Perfil(tf_name.getText(), jdc_born.toString(), genero, tf_race.getText(), ta_obs.getText());
         perfiles.add(nuevo);
         tf_name.setText("");
         tf_race.setText("");
         ta_obs.setText("");
-        JOptionPane.showMessageDialog(this,"Perfil registrado exitosamente");
+        JOptionPane.showMessageDialog(this, "Perfil registrado exitosamente");
         b_arbol.setEnabled(true);
         b_mapa.setEnabled(true);
-        DefaultComboBoxModel modelo1=(DefaultComboBoxModel)cbx_perfiles.getModel();
-        DefaultComboBoxModel modelo2=(DefaultComboBoxModel)cbx_treehead.getModel();
+        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) cbx_perfiles.getModel();
+        DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cbx_treehead.getModel();
         modelo1.addElement(nuevo);
-        modelo2.addElement(nuevo); 
-        
+        modelo2.addElement(nuevo);
+
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void b_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_arbolActionPerformed
@@ -445,10 +400,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void b_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_arbolMouseClicked
-        Perfil head=(Perfil)cbx_treehead.getSelectedItem();
-        DefaultComboBoxModel modelo=(DefaultComboBoxModel)cbx_agregar_hijos.getModel();
+        Perfil head = (Perfil) cbx_treehead.getSelectedItem();
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
         for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()!=head.getNombre()) {
+            if (perfiles.get(i).getNombre() != head.getNombre()) {
                 modelo.addElement(perfiles.get(i));
             }
         }
@@ -463,31 +418,31 @@ public class Main extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()==tf_nodo_actual.getText()) {
-                perfiles.get(i).getHijos().add((Perfil)cbx_agregar_hijos.getSelectedItem());
-                DefaultComboBoxModel modelo0=(DefaultComboBoxModel)cbx_cambio_nodo.getModel();
-                modelo0.addElement((Perfil)cbx_agregar_hijos.getSelectedItem());
+            if (perfiles.get(i).getNombre() == tf_nodo_actual.getText()) {
+                perfiles.get(i).getHijos().add((Perfil) cbx_agregar_hijos.getSelectedItem());
+                DefaultComboBoxModel modelo0 = (DefaultComboBoxModel) cbx_cambio_nodo.getModel();
+                modelo0.addElement((Perfil) cbx_agregar_hijos.getSelectedItem());
                 cbx_cambio_nodo.setModel(modelo0);
                 cbx_cambio_nodo.setModel(modelo0);
             }
         }
-        DefaultComboBoxModel modelo=(DefaultComboBoxModel)cbx_agregar_hijos.getModel();
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
         modelo.removeElementAt(cbx_agregar_hijos.getSelectedIndex());
         cbx_agregar_hijos.setModel(modelo);
-        JOptionPane.showMessageDialog(this,tf_nodo_actual.getText()+" se le ha agregado un nuevo hijo");
+        JOptionPane.showMessageDialog(this, tf_nodo_actual.getText() + " se le ha agregado un nuevo hijo");
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        boolean revision=true;
+        boolean revision = true;
         for (int i = 0; i < perfiles.size(); i++) {
-            if (perfiles.get(i).getNombre()==this.cbx_cambio_nodo.toString()) {
+            if (perfiles.get(i).getNombre() == this.cbx_cambio_nodo.toString()) {
                 tf_nodo_actual.setText(perfiles.get(i).getNombre());
-                revision=false;
+                revision = false;
             }
         }
         if (revision) {
-            JOptionPane.showMessageDialog(this,"el nombre que usted ha ingresado no exite o no se encuentra en el arbol");
+            JOptionPane.showMessageDialog(this, "el nombre que usted ha ingresado no exite o no se encuentra en el arbol");
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
@@ -496,15 +451,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_mapaActionPerformed
 
     private void jb_GrafoDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_GrafoDialogMouseClicked
-        
+
         jd_Grafo.setLocationRelativeTo(this);
         jd_Grafo.pack();
         jd_Grafo.setVisible(true);
-        
+
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
-        
+
+
     }//GEN-LAST:event_jb_GrafoDialogMouseClicked
+
+    private void tf_nodo_actualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nodo_actualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nodo_actualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -544,7 +503,6 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_arbol;
     private javax.swing.JButton b_mapa;
-    private javax.swing.JComboBox<String> cb_Perfiles_Grafo;
     private javax.swing.JComboBox<String> cbx_agregar_hijos;
     private javax.swing.JComboBox<String> cbx_cambio_nodo;
     private javax.swing.JComboBox<String> cbx_perfiles;
@@ -558,7 +516,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -567,11 +524,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jb_Grafo;
     private javax.swing.JButton jb_GrafoDialog;
-    private javax.swing.JDialog jd_Grafo;
     private com.toedter.calendar.JDateChooser jdc_born;
     private javax.swing.JDialog mapa;
     private javax.swing.JRadioButton rb_f;
@@ -583,10 +537,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nodo_actual;
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
-ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
+ArrayList<Perfil> perfiles = new ArrayList();
 
 //Methods
-    public Graph addNodeGrafo(Graph grafo, Node Lista, Node add) {
+    public Graph graphAddNode(Graph grafo, Node Lista, Node add) {
         Node temp = Lista;
         while (temp != null) {
             grafo.addNode(temp.getNombre());
@@ -594,8 +548,8 @@ ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
         }
         return grafo;
     }
-    
-        public Graph graphAddEdge(Graph grafo, Edge Adj) {
+
+    public Graph graphAddEdge(Graph grafo, Edge Adj) {
 
         Edge temp = Adj;
 
@@ -603,4 +557,35 @@ ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
 
         return grafo;
     }
+
+    public Graph graphAddPerfil(Graph arbol, ArrayList<Perfil> raiz) {
+
+        for (int i = 0; i < raiz.size(); i++) {
+            if (raiz.isEmpty()) {
+                System.out.println("Los Componentes del Arbol estan Vacios!!");
+            } else {
+                arbol.addNode(raiz.get(i).getNombre());
+            }
+        }
+        return arbol;
+    }
+
+    public Graph graphAddEdgePerfil(Graph arbol, ArrayList<Perfil> perfil) {
+
+        for (int i = 0; i < perfil.size(); i++) {
+            if (perfil.isEmpty()) {
+                System.out.println("Los Componentes del Arbol estan Vacios!!");
+            } else {
+                try {
+                    for (int j = 0; j < perfil.get(i).getHijos().size(); j++) {
+                        arbol.addEdge("0", perfil.get(i).getNombre(), perfil.get(i).getHijos().get(j).getNombre());
+                    }
+                } catch (Exception e) {
+                }
+
+            }
+        }
+        return arbol;
+    }
+
 }
