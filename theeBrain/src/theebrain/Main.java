@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.SingleGraph;
+//import org.graphstream.graph.*;
+//import org.graphstream.graph.implementations.SingleGraph;
 
 public class Main extends javax.swing.JFrame {
 
@@ -39,18 +39,19 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_obs = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
+        jdc_born = new com.toedter.calendar.JDateChooser();
         genero = new javax.swing.ButtonGroup();
         mapa = new javax.swing.JDialog();
         tf_nodo_actual = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         cbx_agregar_hijos = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
-        tf_cambio_nodo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        cbx_cambio_nodo = new javax.swing.JComboBox<>();
         jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -109,7 +110,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(registroLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addGroup(registroLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jdc_born, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(registroLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,8 +155,10 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addComponent(jLabel4)
-                .addGap(35, 35, 35)
+                .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jdc_born, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(rb_m)
@@ -174,8 +180,18 @@ public class Main extends javax.swing.JFrame {
         tf_nodo_actual.setEnabled(false);
 
         jButton2.setText("Agregar Hijo:");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setText("Cambiar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Nodo actual");
@@ -207,8 +223,8 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
                         .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mapaLayout.createSequentialGroup()
-                                .addComponent(tf_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbx_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,8 +257,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(cbx_cambio_nodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -386,6 +402,37 @@ public class Main extends javax.swing.JFrame {
         this.mapa.setVisible(true);
     }//GEN-LAST:event_b_arbolMouseClicked
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        for (int i = 0; i < perfiles.size(); i++) {
+            if (perfiles.get(i).getNombre()==tf_nodo_actual.getText()) {
+                perfiles.get(i).getHijos().add((Perfil)cbx_agregar_hijos.getSelectedItem());
+                DefaultComboBoxModel modelo0=(DefaultComboBoxModel)cbx_cambio_nodo.getModel();
+                modelo0.addElement((Perfil)cbx_agregar_hijos.getSelectedItem());
+                cbx_cambio_nodo.setModel(modelo0);
+                cbx_cambio_nodo.setModel(modelo0);
+            }
+        }
+        DefaultComboBoxModel modelo=(DefaultComboBoxModel)cbx_agregar_hijos.getModel();
+        modelo.removeElementAt(cbx_agregar_hijos.getSelectedIndex());
+        cbx_agregar_hijos.setModel(modelo);
+        JOptionPane.showMessageDialog(this,tf_nodo_actual.getText()+" se le ha agregado un nuevo hijo");
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        boolean revision=true;
+        for (int i = 0; i < perfiles.size(); i++) {
+            if (perfiles.get(i).getNombre()==this.cbx_cambio_nodo.toString()) {
+                tf_nodo_actual.setText(perfiles.get(i).getNombre());
+                revision=false;
+            }
+        }
+        if (revision) {
+            JOptionPane.showMessageDialog(this,"el nombre que usted ha ingresado no exite o no se encuentra en el arbol");
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -425,6 +472,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton b_arbol;
     private javax.swing.JButton b_mapa;
     private javax.swing.JComboBox<String> cbx_agregar_hijos;
+    private javax.swing.JComboBox<String> cbx_cambio_nodo;
     private javax.swing.JComboBox<String> cbx_perfiles;
     private javax.swing.JComboBox<String> cbx_treehead;
     private javax.swing.ButtonGroup genero;
@@ -446,16 +494,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdc_born;
     private javax.swing.JDialog mapa;
     private javax.swing.JRadioButton rb_f;
     private javax.swing.JRadioButton rb_m;
     private javax.swing.JRadioButton rb_x;
     private javax.swing.JDialog registro;
     private javax.swing.JTextArea ta_obs;
-    private javax.swing.JTextField tf_cambio_nodo;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_nodo_actual;
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
 ArrayList<Perfil> perfiles=new ArrayList<Perfil>();
+
 }
