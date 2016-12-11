@@ -2,8 +2,8 @@ package theebrain;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-//import org.graphstream.graph.*;
-//import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.SingleGraph;
 
 public class Main extends javax.swing.JFrame {
 
