@@ -450,10 +450,14 @@ public class Main extends javax.swing.JFrame {
         cbx_agregar_hijos.setModel(modelo);
         nodo_actual = head;
         tf_nodo_actual.setText(head.getNombre());
+        this.graphAdd_Perfil(Arbol);
+        Arbol.display();
         this.arbol.pack();
         this.arbol.setModal(true);
         this.setLocationRelativeTo(this);
         this.arbol.setVisible(true);
+        
+        
     }//GEN-LAST:event_bt_crear_arbolMouseClicked
 
     private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
@@ -483,6 +487,7 @@ public class Main extends javax.swing.JFrame {
             if (cbx_agregar_hijos.getItemCount() == 0) {
                 bt_agregar_hijo.setEnabled(false);
             }
+            this.graphAdd_Hijo(Arbol);
         }
 
 
@@ -591,5 +596,28 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
 ArrayList<Perfil> perfiles = new ArrayList<Perfil>();
-    Perfil nodo_actual;
+Perfil nodo_actual;
+Graph Arbol=new SingleGraph("Arbol Genealogico");
+
+public Graph graphAdd_Perfil(Graph grafo){
+    for (int i = 0; i < perfiles.size(); i++) {
+        try {
+            grafo.addNode(perfiles.get(i).getNombre());
+        } catch (Exception e) {
+        }
+    }
+    return grafo;
+}
+public Graph graphAdd_Hijo(Graph grafo){
+    
+    for (int i = 0; i < perfiles.size(); i++) {
+        try {
+            for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
+                grafo.addEdge("0", perfiles.get(i).getNombre(),  perfiles.get(i).getHijos().get(j).getNombre());
+            }
+        } catch (Exception e) {
+        }
+    }
+    return grafo;
+}
 }
