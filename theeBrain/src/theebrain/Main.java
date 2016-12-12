@@ -618,8 +618,26 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_registrarActionPerformed
 
     private void bt_crear_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crear_arbolMouseClicked
+        System.out.println("Antes------");
+        for (int i = 0; i < perfiles.size() ; i++) {
+            for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
+                System.out.println(perfiles.get(i)+"->"+perfiles.get(i).getHijos().get(j));
+            }
+        }
+        System.out.println("Despues------");
+        for (int i = 0; i < perfiles.size(); i++) {
+            perfiles.get(i).setHijos(new ArrayList<Perfil>());
+        }
+        for (int i = 0; i < perfiles.size(); i++) {
+            for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
+                System.out.println(perfiles.get(i)+"->"+perfiles.get(i).getHijos().get(j));
+            }
+        }
+        cbx_agregar_hijos.setModel(new DefaultComboBoxModel());
+        cbx_cambio_nodo.setModel(new DefaultComboBoxModel());
         Perfil head = (Perfil) cbx_treehead.getSelectedItem();
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
+        Arbol = new SingleGraph("Arbol Genealogico");
         for (int i = 0; i < perfiles.size(); i++) {
             if (perfiles.get(i).getNombre() != head.getNombre()) {
                 modelo.addElement(perfiles.get(i));
@@ -629,8 +647,12 @@ public class Main extends javax.swing.JFrame {
         nodo_actual = head;
         tf_nodo_actual.setText(head.getNombre());
         if (PadreGrafico == false) {
+            String styleSheet = "node {"
+                    +       "fill-color: blue;"
+                    +"}";
             org.graphstream.graph.Node node = Arbol.addNode(head.getNombre());
             node.addAttribute("ui.label","RAIZ PRINCIPAL-----> " + head.getNombre());
+            node.addAttribute("ui.stylesheet", styleSheet);
             PadreGrafico = true;
         }
         
@@ -649,7 +671,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
         // TODO add your handling code here:
-        if (bt_agregar_hijo.isEnabled()) {
+        if (cbx_agregar_hijos.getItemCount()!=0) {
             for (int i = 0; i < perfiles.size(); i++) {
                 if (perfiles.get(i).getNombre() == nodo_actual.getNombre()) {
                     Perfil Padre = (Perfil) cbx_perfiles.getSelectedItem();
@@ -657,7 +679,6 @@ public class Main extends javax.swing.JFrame {
                     perfiles.get(i).getHijos().add(hijo);
                     DefaultComboBoxModel modelo0 = (DefaultComboBoxModel) cbx_cambio_nodo.getModel();
                     modelo0.addElement((Perfil) cbx_agregar_hijos.getSelectedItem());
-                    cbx_cambio_nodo.setModel(modelo0);
                     cbx_cambio_nodo.setModel(modelo0);
                     org.graphstream.graph.Node node = Arbol.getNode(hijo.getNombre());
                     node.addAttribute("ui.label","Hijo de: " + Padre_Perfil.getNombre() + "------>" + node.getId());
@@ -675,14 +696,8 @@ public class Main extends javax.swing.JFrame {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
             modelo.removeElementAt(cbx_agregar_hijos.getSelectedIndex());
             cbx_agregar_hijos.setModel(modelo);
-            if (cbx_agregar_hijos.getItemCount() == 0) {
-                bt_agregar_hijo.setEnabled(false);
-            }
-
+            contador++;
         }
-
-        contador++;
-
     }//GEN-LAST:event_bt_agregar_hijoMouseClicked
 
     private void bt_cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_cambiarMouseClicked
