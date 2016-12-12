@@ -1,5 +1,8 @@
 package theebrain;
 import java.util.ArrayList;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleGraph;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,28 +15,21 @@ import java.util.ArrayList;
  * @author admin
  */
 class MapaMental {
-    Node Palabra;
-    ArrayList<Edge> Adyacencias;
+   
+    Graph grafo;
 
-    public MapaMental() {
+    public MapaMental(Graph grafo) {
+        this.grafo = grafo;
     }
 
-    public Node getPalabra() {
-        return Palabra;
+    public Graph getGrafo() {
+        return grafo;
     }
 
-    public void setPalabra(Node Palabra) {
-        this.Palabra = Palabra;
+    public void setGrafo(Graph grafo) {
+        this.grafo = grafo;
     }
-
-    public ArrayList<Edge> getAdyacencias() {
-        return Adyacencias;
-    }
-
-    public void setAdyacencias(ArrayList<Edge> Adyacencias) {
-        this.Adyacencias = Adyacencias;
-    }
-
+    
     @Override
     public String toString() {
         return "MapaMental{" + '}';
