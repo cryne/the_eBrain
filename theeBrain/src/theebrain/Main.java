@@ -3,6 +3,8 @@ package theebrain;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.graphstream.algorithm.Dijkstra;
+import org.graphstream.algorithm.Prim;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.view.Viewer;
@@ -64,8 +66,6 @@ public class Main extends javax.swing.JFrame {
         cb_MapaMentales = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jb_AccesarMapaMental = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jd_MapaMental_Palabras = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         tf_MapaMental = new javax.swing.JTextField();
@@ -77,6 +77,8 @@ public class Main extends javax.swing.JFrame {
         jb_modificarPalabra = new javax.swing.JButton();
         jb_eliminarPalabra = new javax.swing.JButton();
         jb_addEdge = new javax.swing.JButton();
+        jb_Dijktra = new javax.swing.JButton();
+        jb_Prim = new javax.swing.JButton();
         jd_Modificar = new javax.swing.JDialog();
         jb_AcceptarMod = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
@@ -88,6 +90,10 @@ public class Main extends javax.swing.JFrame {
         jb_Aristas = new javax.swing.JButton();
         sp_Weight = new javax.swing.JSpinner();
         jLabel22 = new javax.swing.JLabel();
+        jd_Dijkstra = new javax.swing.JDialog();
+        jLabel17 = new javax.swing.JLabel();
+        cb_Dijkstra = new javax.swing.JComboBox<>();
+        jb_Dijkstra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         bt_registrar_perfil = new javax.swing.JButton();
         bt_mapa_mental = new javax.swing.JButton();
@@ -352,10 +358,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Dijkstra");
-
-        jButton2.setText("Prim");
-
         javax.swing.GroupLayout jd_MapaMentalLayout = new javax.swing.GroupLayout(jd_MapaMental.getContentPane());
         jd_MapaMental.getContentPane().setLayout(jd_MapaMentalLayout);
         jd_MapaMentalLayout.setHorizontalGroup(
@@ -378,17 +380,15 @@ public class Main extends javax.swing.JFrame {
                 .addGap(250, 250, 250))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_MapaMentalLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
                         .addComponent(jb_AccesarMapaMental)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130))
+                        .addGap(242, 242, 242))))
         );
         jd_MapaMentalLayout.setVerticalGroup(
             jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,12 +407,9 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addGap(27, 27, 27)
-                .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_AccesarMapaMental)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(32, 32, 32))
+                .addGap(28, 28, 28)
+                .addComponent(jb_AccesarMapaMental)
+                .addGap(31, 31, 31))
         );
 
         jLabel15.setText("Mapa Mental");
@@ -471,6 +468,20 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jb_Dijktra.setText("Dijkstra");
+        jb_Dijktra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_DijktraMouseClicked(evt);
+            }
+        });
+
+        jb_Prim.setText("Prim");
+        jb_Prim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_PrimMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_MapaMental_PalabrasLayout = new javax.swing.GroupLayout(jd_MapaMental_Palabras.getContentPane());
         jd_MapaMental_Palabras.getContentPane().setLayout(jd_MapaMental_PalabrasLayout);
         jd_MapaMental_PalabrasLayout.setHorizontalGroup(
@@ -479,35 +490,38 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                        .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_MapaMental, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_Palabra)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
                         .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cb_Palabras, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jb_modificarPalabra)
-                                .addGap(39, 39, 39)
-                                .addComponent(jb_addEdge)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                                .addComponent(jb_eliminarPalabra)))
-                        .addGap(23, 23, 23))))
+                            .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_MapaMental, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_Palabra)))
+                            .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                                    .addComponent(jb_modificarPalabra)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jb_addEdge)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jb_eliminarPalabra))
+                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                                    .addComponent(jLabel18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cb_Palabras, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(67, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jb_Dijktra)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_Prim)
+                        .addGap(151, 151, 151))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jb_AgregarPalabra)
-                .addGap(191, 191, 191))
+                .addGap(196, 196, 196))
         );
         jd_MapaMental_PalabrasLayout.setVerticalGroup(
             jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,18 +534,22 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(tf_Palabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
+                .addGap(80, 80, 80)
                 .addComponent(jb_AgregarPalabra)
-                .addGap(50, 50, 50)
+                .addGap(41, 41, 41)
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cb_Palabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_modificarPalabra)
                     .addComponent(jb_eliminarPalabra)
                     .addComponent(jb_addEdge))
-                .addContainerGap())
+                .addGap(38, 38, 38)
+                .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_Dijktra)
+                    .addComponent(jb_Prim))
+                .addGap(64, 64, 64))
         );
 
         jb_AcceptarMod.setText("Ok");
@@ -598,7 +616,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jd_AristaLayout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sp_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sp_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_AristaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -619,6 +637,42 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jb_Aristas)
                 .addGap(72, 72, 72))
+        );
+
+        jLabel17.setText("Palabras");
+
+        jb_Dijkstra.setText("Compute");
+        jb_Dijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_DijkstraMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_DijkstraLayout = new javax.swing.GroupLayout(jd_Dijkstra.getContentPane());
+        jd_Dijkstra.getContentPane().setLayout(jd_DijkstraLayout);
+        jd_DijkstraLayout.setHorizontalGroup(
+            jd_DijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_DijkstraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cb_Dijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_DijkstraLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_Dijkstra)
+                .addGap(152, 152, 152))
+        );
+        jd_DijkstraLayout.setVerticalGroup(
+            jd_DijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_DijkstraLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jd_DijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cb_Dijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(108, 108, 108)
+                .addComponent(jb_Dijkstra)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -759,7 +813,7 @@ public class Main extends javax.swing.JFrame {
         cbx_cambio_nodo.setModel(new DefaultComboBoxModel());
         Perfil head = (Perfil) cbx_treehead.getSelectedItem();
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbx_agregar_hijos.getModel();
-        Arbol = new SingleGraph("Arbol Genealogico");
+        Graph arbol = new SingleGraph("Arbol Genealogico");
         for (int i = 0; i < perfiles.size(); i++) {
             if (perfiles.get(i).getNombre() != head.getNombre()) {
                 modelo.addElement(perfiles.get(i));
@@ -772,16 +826,18 @@ public class Main extends javax.swing.JFrame {
             String styleSheet = "node {"
                     + "fill-color: blue;"
                     + "}";
-            org.graphstream.graph.Node node = Arbol.addNode(head.getNombre());
+            org.graphstream.graph.Node node = arbol.addNode(head.getNombre());
             node.addAttribute("ui.label", "RAIZ PRINCIPAL-----> " + head.getNombre());
             node.addAttribute("ui.stylesheet", styleSheet);
             PadreGrafico = true;
         }
 
         Padre_Perfil = head;
-        graphAdd_Perfil(Arbol);
+        graphAdd_Perfil(arbol);
+        
+        Arbol.add(arbol);
 
-        viewer = Arbol.display();
+        Viewer viewer = arbol.display();
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
 
         this.arbol.pack();
@@ -793,6 +849,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
         // TODO add your handling code here:
+        int mainArbol = (int)cbx_treehead.getSelectedItem();
         if (cbx_agregar_hijos.getItemCount() != 0) {
             for (int i = 0; i < perfiles.size(); i++) {
                 if (perfiles.get(i).getNombre() == nodo_actual.getNombre()) {
@@ -802,9 +859,17 @@ public class Main extends javax.swing.JFrame {
                     DefaultComboBoxModel modelo0 = (DefaultComboBoxModel) cbx_cambio_nodo.getModel();
                     modelo0.addElement((Perfil) cbx_agregar_hijos.getSelectedItem());
                     cbx_cambio_nodo.setModel(modelo0);
-                    org.graphstream.graph.Node node = Arbol.getNode(hijo.getNombre());
+                    org.graphstream.graph.Node node = Arbol.get(mainArbol).getNode(hijo.getNombre());
                     node.addAttribute("ui.label", "Hijo de: " + Padre_Perfil.getNombre() + "------>" + node.getId());
-                    Arbol.addEdge(contador + "", perfiles.get(i).getNombre(), hijo.getNombre());
+                    String styleSheet
+                            = "node {"
+                            + "	fill-color: black;"
+                            + "}"
+                            + "node.marked {"
+                            + "	fill-color: red;"
+                            + "}";
+                    Arbol.get(mainArbol).addAttribute("ui.stylesheet", styleSheet);
+                    Arbol.get(mainArbol).addEdge(contador + "", perfiles.get(i).getNombre(), hijo.getNombre());
                     JOptionPane.showMessageDialog(this, tf_nodo_actual.getText() + " se le ha agregado un nuevo hijo");
                 }
             }
@@ -903,10 +968,11 @@ public class Main extends javax.swing.JFrame {
     private void jb_AccesarMapaMentalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AccesarMapaMentalMouseClicked
 
         int IndexMain = perfiles.indexOf(MainMapaMental);
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
 
         tf_MapaMental.setText(MainMapaMental.getNombre());
 
-        Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).getGrafo();
 
         Viewer MapaM = grafo.display();
         MapaM.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
@@ -923,21 +989,23 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_AgregarPalabraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AgregarPalabraMouseClicked
 
-        int IndexMain = perfiles.indexOf(MainMapaMental);
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
 
         if (tf_Palabra.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Casilla vacia o valor de arista ocupada!");
         } else {
-            Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+            Graph grafo = MainMapaMental.getMapas().get(indexGraph).grafo;
             org.graphstream.graph.Node node = grafo.addNode(tf_Palabra.getText());
             node.addAttribute("ui.label", tf_Palabra.getText());
             JOptionPane.showMessageDialog(this, "Se a agregadeo una nueva palabra al mapa!");
 
             DefaultComboBoxModel model = (DefaultComboBoxModel) cb_Palabras.getModel();
             DefaultComboBoxModel modelAristas = (DefaultComboBoxModel) cb_PalabraArista.getModel();
+            DefaultComboBoxModel modelDijkstra = (DefaultComboBoxModel) cb_Dijkstra.getModel();
 
             modelAristas.addElement(tf_Palabra.getText());
             model.addElement(tf_Palabra.getText());
+            modelDijkstra.addElement(tf_Palabra.getText());
 
             cb_Palabras.setModel(model);
 
@@ -965,9 +1033,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_AcceptarModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AcceptarModMouseClicked
 
-        int IndexMain = perfiles.indexOf(MainMapaMental);
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
 
-        Graph grafo = MainMapaMental.getMapas().get(IndexMain).getGrafo();
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).getGrafo();
 
         grafo.removeNode((String) cb_Palabras.getSelectedItem());
 
@@ -988,9 +1056,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_eliminarPalabraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarPalabraMouseClicked
 
-        int IndexMain = perfiles.indexOf(MainMapaMental);
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
 
-        Graph grafo = MainMapaMental.getMapas().get(IndexMain).getGrafo();
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).getGrafo();
 
         grafo.removeNode((String) cb_Palabras.getSelectedItem());
 
@@ -1022,8 +1090,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_AristasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AristasMouseClicked
 
-        int IndexMain = perfiles.indexOf(MainMapaMental);
-        Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
+
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).getGrafo();
 
         boolean trigger = false;
         for (int i = 0; i < AristasVer.size(); i++) {
@@ -1036,7 +1105,7 @@ public class Main extends javax.swing.JFrame {
             org.graphstream.graph.Edge edge = grafo.addEdge((int) sp_Weight.getValue() + "", (String) cb_Palabras.getSelectedItem(), (String) cb_PalabraArista.getSelectedItem());
             edge.addAttribute("Weight", (int) sp_Weight.getValue());
             edge.addAttribute("ui.label", (int) sp_Weight.getValue());
-            System.out.println(edge.getId());
+
             JOptionPane.showMessageDialog(this, "Numero de importancia agregado entre nodos!");
 
             DefaultComboBoxModel model = (DefaultComboBoxModel) cb_PalabraArista.getModel();
@@ -1051,6 +1120,90 @@ public class Main extends javax.swing.JFrame {
         jd_Arista.setVisible(false);
 
     }//GEN-LAST:event_jb_AristasMouseClicked
+
+    private void jb_DijktraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_DijktraMouseClicked
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_Dijkstra.getModel();
+        model.removeElement(cb_Palabras.getSelectedIndex());
+        cb_Dijkstra.setModel(model);
+
+        jd_Dijkstra.setLocationRelativeTo(this);
+        jd_Dijkstra.pack();
+        jd_Dijkstra.setVisible(true);
+
+    }//GEN-LAST:event_jb_DijktraMouseClicked
+
+    private void jb_PrimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_PrimMouseClicked
+
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
+        Graph temp = new SingleGraph("Prim");
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).grafo;
+
+        for (org.graphstream.graph.Node node : grafo) {
+            temp.addNode(node.getId());
+            org.graphstream.graph.Node nodeAttribute = temp.getNode(node.getId());
+            nodeAttribute.addAttribute("ui.label", node.getId());
+        }
+
+        for (org.graphstream.graph.Edge edge : grafo.getEachEdge()) {
+            temp.addEdge(edge.getId(), temp.getNode(edge.getNode0().getId()).getId(), temp.getNode(edge.getNode1().getId()).getId());
+            org.graphstream.graph.Edge edgy = temp.getEdge(edge.getId());
+            edgy.addAttribute("ui.label", edge.getId());
+        }
+
+        String css = "edge .notintree {size:1px;fill-color:gray;} "
+                + "edge .intree {size:3px;fill-color:red;}";
+
+        temp.addAttribute("ui.stylesheet", css);
+
+        Prim prim = new Prim("ui.class", "intree", "notintree");
+
+        prim.init(temp);
+        prim.compute();
+
+        Viewer view = temp.display();
+        view.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
+
+    }//GEN-LAST:event_jb_PrimMouseClicked
+
+    private void jb_DijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_DijkstraMouseClicked
+
+        int indexGraph = cb_MapaMentales.getSelectedIndex();
+        Graph grafo = MainMapaMental.getMapas().get(indexGraph).grafo;
+
+        Graph temp = new SingleGraph("Dijkstra");
+
+        for (org.graphstream.graph.Node node : grafo) {
+            temp.addNode(node.getId());
+            System.out.println(temp.getNode(node.getId()).getId());
+            org.graphstream.graph.Node nodeAttribute = temp.getNode(node.getId());
+            nodeAttribute.addAttribute("ui.label", node.getId());
+        }
+
+        for (org.graphstream.graph.Edge edge : grafo.getEachEdge()) {
+            temp.addEdge(edge.getId(), temp.getNode(edge.getNode0().getId()).getId(), temp.getNode(edge.getNode1().getId()).getId());
+            org.graphstream.graph.Edge edgy = temp.getEdge(edge.getId());
+            edgy.addAttribute("ui.label", edge.getId());
+        }
+
+        Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "Weight");
+        dijkstra.init(temp);
+        dijkstra.setSource(temp.getNode((String) cb_Palabras.getSelectedItem()));
+        dijkstra.compute(); 
+
+        for (org.graphstream.graph.Node node : dijkstra.getPathNodes(temp.getNode((String) cb_Dijkstra.getSelectedItem()))) {
+            node.addAttribute("ui.style", "fill-color: blue;");
+        }
+
+        for (org.graphstream.graph.Edge edge : dijkstra.getTreeEdges()) {
+            edge.addAttribute("ui.style", "fill-color: red;");
+        }
+
+        Viewer view = temp.display();
+        view.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
+
+
+    }//GEN-LAST:event_jb_DijkstraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1095,6 +1248,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_mapa_mental;
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton bt_registrar_perfil;
+    private javax.swing.JComboBox<String> cb_Dijkstra;
     private javax.swing.JComboBox<String> cb_MapaMentales;
     private javax.swing.JComboBox<String> cb_PalabraArista;
     private javax.swing.JComboBox<String> cb_Palabras;
@@ -1103,8 +1257,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbx_perfiles;
     private javax.swing.JComboBox<String> cbx_treehead;
     private javax.swing.ButtonGroup genero;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1113,6 +1265,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1137,10 +1290,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jb_AgregarBoton;
     private javax.swing.JButton jb_AgregarPalabra;
     private javax.swing.JButton jb_Aristas;
+    private javax.swing.JButton jb_Dijkstra;
+    private javax.swing.JButton jb_Dijktra;
+    private javax.swing.JButton jb_Prim;
     private javax.swing.JButton jb_addEdge;
     private javax.swing.JButton jb_eliminarPalabra;
     private javax.swing.JButton jb_modificarPalabra;
     private javax.swing.JDialog jd_Arista;
+    private javax.swing.JDialog jd_Dijkstra;
     private javax.swing.JDialog jd_MapaMental;
     private javax.swing.JDialog jd_MapaMental_Palabras;
     private javax.swing.JDialog jd_Modificar;
@@ -1161,13 +1318,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
 ArrayList<Perfil> perfiles = new ArrayList<Perfil>();
+    ArrayList<Graph> grafos = new ArrayList();
+    ArrayList<Graph> Arbol = new ArrayList();
     ArrayList AristasVer = new ArrayList();
     Perfil nodo_actual;
-    Graph Arbol = new SingleGraph("Arbol Genealogico");
     int contador = 0;
     boolean PadreGrafico = false;
     Perfil Padre_Perfil;
-    Viewer viewer;
     Perfil MainMapaMental;
 
     public Graph graphAdd_Perfil(Graph grafo) {
