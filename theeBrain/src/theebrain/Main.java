@@ -100,6 +100,8 @@ public class Main extends javax.swing.JFrame {
         bt_crear_arbol = new javax.swing.JButton();
         cbx_perfiles = new javax.swing.JComboBox<>();
         cbx_treehead = new javax.swing.JComboBox<>();
+        cbx_eliminar = new javax.swing.JComboBox<>();
+        bt_eliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
@@ -708,6 +710,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        bt_eliminar.setText("Eliminar Perfil");
+        bt_eliminar.setEnabled(false);
+        bt_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_eliminarMouseClicked(evt);
+            }
+        });
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -716,22 +726,24 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 184, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbx_treehead, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(bt_mapa_mental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_crear_arbol, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                .addGap(190, 190, 190))
             .addGroup(layout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(bt_registrar_perfil))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbx_eliminar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbx_treehead, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbx_perfiles, 0, 150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(bt_mapa_mental, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_crear_arbol, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                    .addComponent(bt_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(190, 190, 190))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,11 +756,15 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbx_treehead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_crear_arbol))
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_eliminar))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bt_mapa_mental)
                     .addComponent(cbx_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         pack();
@@ -778,11 +794,16 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Perfil registrado exitosamente");
         bt_crear_arbol.setEnabled(true);
         bt_mapa_mental.setEnabled(true);
+        bt_eliminar.setEnabled(true);
         DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) cbx_perfiles.getModel();
         DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cbx_treehead.getModel();
+        DefaultComboBoxModel modelo3 = (DefaultComboBoxModel) cbx_eliminar.getModel();
         modelo1.addElement(nuevo);
         modelo2.addElement(nuevo);
-
+        modelo3.addElement(nuevo);
+        cbx_perfiles.setModel(modelo1);
+        cbx_treehead.setModel(modelo2);
+        cbx_eliminar.setModel(modelo3);
     }//GEN-LAST:event_bt_registrarMouseClicked
 
     private void bt_crear_arbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_crear_arbolActionPerformed
@@ -849,7 +870,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
         // TODO add your handling code here:
-        int mainArbol = (int)cbx_treehead.getSelectedItem();
+        int mainArbol = cbx_treehead.getSelectedIndex();
         if (cbx_agregar_hijos.getItemCount() != 0) {
             for (int i = 0; i < perfiles.size(); i++) {
                 if (perfiles.get(i).getNombre() == nodo_actual.getNombre()) {
@@ -1205,6 +1226,27 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jb_DijkstraMouseClicked
 
+    private void bt_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_eliminarMouseClicked
+        perfiles.remove(cbx_eliminar.getSelectedIndex());
+        DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelo2 = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelo3 = new DefaultComboBoxModel();
+        for (int i = 0; i < perfiles.size(); i++) {
+            modelo1.addElement(perfiles.get(i));
+            modelo2.addElement(perfiles.get(i));
+            modelo3.addElement(perfiles.get(i));
+        }
+        cbx_perfiles.setModel(modelo1);
+        cbx_treehead.setModel(modelo2);
+        cbx_eliminar.setModel(modelo3);
+        JOptionPane.showMessageDialog(this, "Perfil eliminado exitosamente");
+        if (cbx_eliminar.getItemCount()==0) {
+            bt_crear_arbol.setEnabled(false);
+            bt_mapa_mental.setEnabled(false);
+            bt_eliminar.setEnabled(false);
+        }
+    }//GEN-LAST:event_bt_eliminarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1245,6 +1287,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregar_hijo;
     private javax.swing.JButton bt_cambiar;
     private javax.swing.JButton bt_crear_arbol;
+    private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_mapa_mental;
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton bt_registrar_perfil;
@@ -1254,6 +1297,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_Palabras;
     private javax.swing.JComboBox<String> cbx_agregar_hijos;
     private javax.swing.JComboBox<String> cbx_cambio_nodo;
+    private javax.swing.JComboBox<String> cbx_eliminar;
     private javax.swing.JComboBox<String> cbx_perfiles;
     private javax.swing.JComboBox<String> cbx_treehead;
     private javax.swing.ButtonGroup genero;

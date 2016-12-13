@@ -893,19 +893,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="184" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cbx_treehead" max="32767" attributes="0"/>
-                  <Component id="cbx_perfiles" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="bt_mapa_mental" max="32767" attributes="0"/>
-                  <Component id="bt_crear_arbol" pref="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -913,6 +900,21 @@
                   <Component id="bt_registrar_perfil" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cbx_eliminar" max="32767" attributes="0"/>
+                  <Component id="cbx_treehead" max="32767" attributes="0"/>
+                  <Component id="cbx_perfiles" alignment="0" pref="150" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="bt_mapa_mental" max="32767" attributes="0"/>
+                  <Component id="bt_crear_arbol" pref="0" max="32767" attributes="0"/>
+                  <Component id="bt_eliminar" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -928,12 +930,17 @@
                   <Component id="cbx_treehead" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bt_crear_arbol" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbx_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bt_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="bt_mapa_mental" min="-2" max="-2" attributes="0"/>
                   <Component id="cbx_perfiles" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="127" max="32767" attributes="0"/>
+              <EmptySpace pref="126" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -993,6 +1000,25 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbx_eliminar">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="bt_eliminar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Perfil"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_eliminarMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
