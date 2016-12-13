@@ -64,18 +64,30 @@ public class Main extends javax.swing.JFrame {
         cb_MapaMentales = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jb_AccesarMapaMental = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jd_MapaMental_Palabras = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         tf_MapaMental = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         tf_Palabra = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
         jb_AgregarPalabra = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         cb_Palabras = new javax.swing.JComboBox<>();
         jb_modificarPalabra = new javax.swing.JButton();
         jb_eliminarPalabra = new javax.swing.JButton();
+        jb_addEdge = new javax.swing.JButton();
+        jd_Modificar = new javax.swing.JDialog();
+        jb_AcceptarMod = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        tf_PalabraMod = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jd_Arista = new javax.swing.JDialog();
+        jLabel21 = new javax.swing.JLabel();
+        cb_PalabraArista = new javax.swing.JComboBox<>();
+        jb_Aristas = new javax.swing.JButton();
+        sp_Weight = new javax.swing.JSpinner();
+        jLabel22 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         bt_registrar_perfil = new javax.swing.JButton();
         bt_mapa_mental = new javax.swing.JButton();
@@ -340,6 +352,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Dijkstra");
+
+        jButton2.setText("Prim");
+
         javax.swing.GroupLayout jd_MapaMentalLayout = new javax.swing.GroupLayout(jd_MapaMental.getContentPane());
         jd_MapaMental.getContentPane().setLayout(jd_MapaMentalLayout);
         jd_MapaMentalLayout.setHorizontalGroup(
@@ -362,15 +378,17 @@ public class Main extends javax.swing.JFrame {
                 .addGap(250, 250, 250))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMentalLayout.createSequentialGroup()
+                    .addGroup(jd_MapaMentalLayout.createSequentialGroup()
                         .addComponent(jb_AccesarMapaMental)
-                        .addGap(247, 247, 247))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(130, 130, 130))
         );
         jd_MapaMentalLayout.setVerticalGroup(
             jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,9 +407,12 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_MapaMentales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addGap(33, 33, 33)
-                .addComponent(jb_AccesarMapaMental)
-                .addGap(26, 26, 26))
+                .addGap(27, 27, 27)
+                .addGroup(jd_MapaMentalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_AccesarMapaMental)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(32, 32, 32))
         );
 
         jLabel15.setText("Mapa Mental");
@@ -405,8 +426,6 @@ public class Main extends javax.swing.JFrame {
 
         jLabel16.setText("Ingrese la Palabra:");
 
-        jLabel17.setText("Digite la importanica:");
-
         jb_AgregarPalabra.setText("Agregar");
         jb_AgregarPalabra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -417,6 +436,11 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setText("Palabras:");
 
         jb_modificarPalabra.setText("Modificar");
+        jb_modificarPalabra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_modificarPalabraMouseClicked(evt);
+            }
+        });
         jb_modificarPalabra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_modificarPalabraActionPerformed(evt);
@@ -424,9 +448,26 @@ public class Main extends javax.swing.JFrame {
         });
 
         jb_eliminarPalabra.setText("Eliminar");
+        jb_eliminarPalabra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_eliminarPalabraMouseClicked(evt);
+            }
+        });
         jb_eliminarPalabra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_eliminarPalabraActionPerformed(evt);
+            }
+        });
+
+        jb_addEdge.setText("Agregar Arista");
+        jb_addEdge.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_addEdgeMouseClicked(evt);
+            }
+        });
+        jb_addEdge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_addEdgeActionPerformed(evt);
             }
         });
 
@@ -434,28 +475,19 @@ public class Main extends javax.swing.JFrame {
         jd_MapaMental_Palabras.getContentPane().setLayout(jd_MapaMental_PalabrasLayout);
         jd_MapaMental_PalabrasLayout.setHorizontalGroup(
             jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jb_AgregarPalabra)
-                .addGap(192, 192, 192))
             .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                        .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tf_MapaMental, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                    .addComponent(jLabel16)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tf_Palabra)))
+                        .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
-                                .addComponent(jLabel17)
+                                .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tf_MapaMental, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_Palabra)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
                         .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,9 +499,15 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jd_MapaMental_PalabrasLayout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(jb_modificarPalabra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jb_addEdge)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                 .addComponent(jb_eliminarPalabra)))
                         .addGap(23, 23, 23))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_MapaMental_PalabrasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_AgregarPalabra)
+                .addGap(191, 191, 191))
         );
         jd_MapaMental_PalabrasLayout.setVerticalGroup(
             jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,21 +520,105 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(tf_Palabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(71, 71, 71)
                 .addComponent(jb_AgregarPalabra)
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cb_Palabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jd_MapaMental_PalabrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_modificarPalabra)
-                    .addComponent(jb_eliminarPalabra))
+                    .addComponent(jb_eliminarPalabra)
+                    .addComponent(jb_addEdge))
                 .addContainerGap())
+        );
+
+        jb_AcceptarMod.setText("Ok");
+        jb_AcceptarMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_AcceptarModMouseClicked(evt);
+            }
+        });
+
+        jLabel19.setText("Palabra");
+
+        javax.swing.GroupLayout jd_ModificarLayout = new javax.swing.GroupLayout(jd_Modificar.getContentPane());
+        jd_Modificar.getContentPane().setLayout(jd_ModificarLayout);
+        jd_ModificarLayout.setHorizontalGroup(
+            jd_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_ModificarLayout.createSequentialGroup()
+                .addGroup(jd_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_ModificarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_PalabraMod, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_ModificarLayout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jb_AcceptarMod)))
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+        jd_ModificarLayout.setVerticalGroup(
+            jd_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_ModificarLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jd_ModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(tf_PalabraMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addComponent(jb_AcceptarMod)
+                .addGap(54, 54, 54))
+        );
+
+        jTextField1.setText("jTextField1");
+
+        jLabel21.setText("Palabras");
+
+        jb_Aristas.setText("Ok");
+        jb_Aristas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_AristasMouseClicked(evt);
+            }
+        });
+
+        jLabel22.setText("Importancia");
+
+        javax.swing.GroupLayout jd_AristaLayout = new javax.swing.GroupLayout(jd_Arista.getContentPane());
+        jd_Arista.getContentPane().setLayout(jd_AristaLayout);
+        jd_AristaLayout.setHorizontalGroup(
+            jd_AristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_AristaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jd_AristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_AristaLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_PalabraArista, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_AristaLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sp_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_AristaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jb_Aristas)
+                .addGap(168, 168, 168))
+        );
+        jd_AristaLayout.setVerticalGroup(
+            jd_AristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_AristaLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jd_AristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(cb_PalabraArista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(jd_AristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sp_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(jb_Aristas)
+                .addGap(72, 72, 72))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -619,9 +741,9 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_crear_arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crear_arbolMouseClicked
         System.out.println("Antes------");
-        for (int i = 0; i < perfiles.size() ; i++) {
+        for (int i = 0; i < perfiles.size(); i++) {
             for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
-                System.out.println(perfiles.get(i)+"->"+perfiles.get(i).getHijos().get(j));
+                System.out.println(perfiles.get(i) + "->" + perfiles.get(i).getHijos().get(j));
             }
         }
         System.out.println("Despues------");
@@ -630,7 +752,7 @@ public class Main extends javax.swing.JFrame {
         }
         for (int i = 0; i < perfiles.size(); i++) {
             for (int j = 0; j < perfiles.get(i).getHijos().size(); j++) {
-                System.out.println(perfiles.get(i)+"->"+perfiles.get(i).getHijos().get(j));
+                System.out.println(perfiles.get(i) + "->" + perfiles.get(i).getHijos().get(j));
             }
         }
         cbx_agregar_hijos.setModel(new DefaultComboBoxModel());
@@ -648,20 +770,20 @@ public class Main extends javax.swing.JFrame {
         tf_nodo_actual.setText(head.getNombre());
         if (PadreGrafico == false) {
             String styleSheet = "node {"
-                    +       "fill-color: blue;"
-                    +"}";
+                    + "fill-color: blue;"
+                    + "}";
             org.graphstream.graph.Node node = Arbol.addNode(head.getNombre());
-            node.addAttribute("ui.label","RAIZ PRINCIPAL-----> " + head.getNombre());
+            node.addAttribute("ui.label", "RAIZ PRINCIPAL-----> " + head.getNombre());
             node.addAttribute("ui.stylesheet", styleSheet);
             PadreGrafico = true;
         }
-        
+
         Padre_Perfil = head;
         graphAdd_Perfil(Arbol);
-        
+
         viewer = Arbol.display();
         viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
-        
+
         this.arbol.pack();
         this.setLocationRelativeTo(this);
         this.arbol.setVisible(true);
@@ -671,7 +793,7 @@ public class Main extends javax.swing.JFrame {
 
     private void bt_agregar_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregar_hijoMouseClicked
         // TODO add your handling code here:
-        if (cbx_agregar_hijos.getItemCount()!=0) {
+        if (cbx_agregar_hijos.getItemCount() != 0) {
             for (int i = 0; i < perfiles.size(); i++) {
                 if (perfiles.get(i).getNombre() == nodo_actual.getNombre()) {
                     Perfil Padre = (Perfil) cbx_perfiles.getSelectedItem();
@@ -681,7 +803,7 @@ public class Main extends javax.swing.JFrame {
                     modelo0.addElement((Perfil) cbx_agregar_hijos.getSelectedItem());
                     cbx_cambio_nodo.setModel(modelo0);
                     org.graphstream.graph.Node node = Arbol.getNode(hijo.getNombre());
-                    node.addAttribute("ui.label","Hijo de: " + Padre_Perfil.getNombre() + "------>" + node.getId());
+                    node.addAttribute("ui.label", "Hijo de: " + Padre_Perfil.getNombre() + "------>" + node.getId());
                     Arbol.addEdge(contador + "", perfiles.get(i).getNombre(), hijo.getNombre());
                     JOptionPane.showMessageDialog(this, tf_nodo_actual.getText() + " se le ha agregado un nuevo hijo");
                 }
@@ -720,7 +842,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "el nodo actual ha Cambiado");
             Padre_Perfil = nodo_actual;
         }
-        
+
     }//GEN-LAST:event_bt_cambiarMouseClicked
 
     private void arbolComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_arbolComponentShown
@@ -732,14 +854,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_arbolWindowClosed
 
     private void bt_mapa_mentalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_mapa_mentalMouseClicked
-    MainMapaMental = (Perfil) cbx_perfiles.getSelectedItem();
-    
-    tf_Perfil_Seleccionado.setText(MainMapaMental.getNombre());
-    
-    jd_MapaMental.pack();
-    jd_MapaMental.setLocationRelativeTo(this);
-    jd_MapaMental.setVisible(true);
-    
+        MainMapaMental = (Perfil) cbx_perfiles.getSelectedItem();
+
+        tf_Perfil_Seleccionado.setText(MainMapaMental.getNombre());
+
+        jd_MapaMental.pack();
+        jd_MapaMental.setLocationRelativeTo(this);
+        jd_MapaMental.setVisible(true);
+
     }//GEN-LAST:event_bt_mapa_mentalMouseClicked
 
     private void tf_nodo_actualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nodo_actualActionPerformed
@@ -755,23 +877,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_cambio_nodoActionPerformed
 
     private void jb_AgregarBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AgregarBotonMouseClicked
-    
-    int IndexMain = perfiles.indexOf(MainMapaMental);
-    
-    MainMapaMental = perfiles.get(IndexMain);
-    
-    MapaMental Mapa = new MapaMental(new SingleGraph(tf_Nombre_MapaMental.getText()));
-    
-    DefaultComboBoxModel model = (DefaultComboBoxModel) cb_MapaMentales.getModel();
-    
-    model.addElement(Mapa.getGrafo().getId());
-    
-    cb_MapaMentales.setModel(model);
-    
-    MainMapaMental.getMapas().add(Mapa);
-    
-    JOptionPane.showConfirmDialog(this, "Se a creado un nuevo mapa mental!");
-    
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+
+        MainMapaMental = perfiles.get(IndexMain);
+
+        MapaMental Mapa = new MapaMental(new SingleGraph(tf_Nombre_MapaMental.getText()));
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_MapaMentales.getModel();
+
+        model.addElement(Mapa.getGrafo().getId());
+
+        cb_MapaMentales.setModel(model);
+
+        MainMapaMental.getMapas().add(Mapa);
+
+        JOptionPane.showMessageDialog(this, "Se a creado un nuevo mapa mental!");
+
     }//GEN-LAST:event_jb_AgregarBotonMouseClicked
 
     private void jb_AccesarMapaMentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AccesarMapaMentalActionPerformed
@@ -779,13 +901,20 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_AccesarMapaMentalActionPerformed
 
     private void jb_AccesarMapaMentalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AccesarMapaMentalMouseClicked
-        
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+
         tf_MapaMental.setText(MainMapaMental.getNombre());
-        
+
+        Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+
+        Viewer MapaM = grafo.display();
+        MapaM.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
+
         jd_MapaMental_Palabras.setLocationRelativeTo(this);
         jd_MapaMental_Palabras.pack();
         jd_MapaMental_Palabras.setVisible(true);
-        
+
     }//GEN-LAST:event_jb_AccesarMapaMentalMouseClicked
 
     private void tf_MapaMentalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MapaMentalActionPerformed
@@ -793,9 +922,29 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_MapaMentalActionPerformed
 
     private void jb_AgregarPalabraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AgregarPalabraMouseClicked
-        
-        
-        
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+
+        if (tf_Palabra.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Casilla vacia o valor de arista ocupada!");
+        } else {
+            Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+            org.graphstream.graph.Node node = grafo.addNode(tf_Palabra.getText());
+            node.addAttribute("ui.label", tf_Palabra.getText());
+            JOptionPane.showMessageDialog(this, "Se a agregadeo una nueva palabra al mapa!");
+
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cb_Palabras.getModel();
+            DefaultComboBoxModel modelAristas = (DefaultComboBoxModel) cb_PalabraArista.getModel();
+
+            modelAristas.addElement(tf_Palabra.getText());
+            model.addElement(tf_Palabra.getText());
+
+            cb_Palabras.setModel(model);
+
+            tf_Palabra.setText("");
+        }
+
+
     }//GEN-LAST:event_jb_AgregarPalabraMouseClicked
 
     private void jb_eliminarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminarPalabraActionPerformed
@@ -805,6 +954,103 @@ public class Main extends javax.swing.JFrame {
     private void jb_modificarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarPalabraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_modificarPalabraActionPerformed
+
+    private void jb_modificarPalabraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarPalabraMouseClicked
+
+        jd_Modificar.pack();
+        jd_Modificar.setLocationRelativeTo(this);
+        jd_Modificar.setVisible(true);
+
+    }//GEN-LAST:event_jb_modificarPalabraMouseClicked
+
+    private void jb_AcceptarModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AcceptarModMouseClicked
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+
+        Graph grafo = MainMapaMental.getMapas().get(IndexMain).getGrafo();
+
+        grafo.removeNode((String) cb_Palabras.getSelectedItem());
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_Palabras.getModel();
+        model.removeElement(cb_Palabras.getSelectedIndex());
+
+        cb_Palabras.setModel(model);
+
+        org.graphstream.graph.Node Mod = grafo.addNode(tf_PalabraMod.getText());
+
+        tf_PalabraMod.setText("");
+
+        JOptionPane.showMessageDialog(this, "Palabra Modificada!");
+
+        jd_Modificar.setVisible(false);
+
+    }//GEN-LAST:event_jb_AcceptarModMouseClicked
+
+    private void jb_eliminarPalabraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarPalabraMouseClicked
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+
+        Graph grafo = MainMapaMental.getMapas().get(IndexMain).getGrafo();
+
+        grafo.removeNode((String) cb_Palabras.getSelectedItem());
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_Palabras.getModel();
+        model.removeElement(cb_Palabras.getSelectedIndex());
+
+        cb_Palabras.setModel(model);
+
+        JOptionPane.showMessageDialog(this, "Se Eliminado dicha palabra");
+
+    }//GEN-LAST:event_jb_eliminarPalabraMouseClicked
+
+    private void jb_addEdgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_addEdgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_addEdgeActionPerformed
+
+    private void jb_addEdgeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_addEdgeMouseClicked
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_PalabraArista.getModel();
+
+        model.removeElement(cb_Palabras.getSelectedItem());
+
+        cb_PalabraArista.setModel(model);
+
+        jd_Arista.pack();
+        jd_Arista.setLocationRelativeTo(this);
+        jd_Arista.setVisible(true);
+    }//GEN-LAST:event_jb_addEdgeMouseClicked
+
+    private void jb_AristasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AristasMouseClicked
+
+        int IndexMain = perfiles.indexOf(MainMapaMental);
+        Graph grafo = MainMapaMental.getMapas().get(IndexMain).grafo;
+
+        boolean trigger = false;
+        for (int i = 0; i < AristasVer.size(); i++) {
+            if (sp_Weight.getValue() == AristasVer.get(i)) {
+                trigger = true;
+            }
+        }
+
+        if (trigger == false) {
+            org.graphstream.graph.Edge edge = grafo.addEdge((int) sp_Weight.getValue() + "", (String) cb_Palabras.getSelectedItem(), (String) cb_PalabraArista.getSelectedItem());
+            edge.addAttribute("Weight", (int) sp_Weight.getValue());
+            edge.addAttribute("ui.label", (int) sp_Weight.getValue());
+            System.out.println(edge.getId());
+            JOptionPane.showMessageDialog(this, "Numero de importancia agregado entre nodos!");
+
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cb_PalabraArista.getModel();
+
+            model.addElement(cb_Palabras.getSelectedItem());
+
+            cb_PalabraArista.setModel(model);
+        } else {
+            JOptionPane.showMessageDialog(this, "Valor de importancia ocupado!");
+        }
+
+        jd_Arista.setVisible(false);
+
+    }//GEN-LAST:event_jb_AristasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -850,12 +1096,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bt_registrar;
     private javax.swing.JButton bt_registrar_perfil;
     private javax.swing.JComboBox<String> cb_MapaMentales;
+    private javax.swing.JComboBox<String> cb_PalabraArista;
     private javax.swing.JComboBox<String> cb_Palabras;
     private javax.swing.JComboBox<String> cbx_agregar_hijos;
     private javax.swing.JComboBox<String> cbx_cambio_nodo;
     private javax.swing.JComboBox<String> cbx_perfiles;
     private javax.swing.JComboBox<String> cbx_treehead;
     private javax.swing.ButtonGroup genero;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -864,9 +1113,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -880,29 +1131,37 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jb_AcceptarMod;
     private javax.swing.JButton jb_AccesarMapaMental;
     private javax.swing.JButton jb_AgregarBoton;
     private javax.swing.JButton jb_AgregarPalabra;
+    private javax.swing.JButton jb_Aristas;
+    private javax.swing.JButton jb_addEdge;
     private javax.swing.JButton jb_eliminarPalabra;
     private javax.swing.JButton jb_modificarPalabra;
+    private javax.swing.JDialog jd_Arista;
     private javax.swing.JDialog jd_MapaMental;
     private javax.swing.JDialog jd_MapaMental_Palabras;
+    private javax.swing.JDialog jd_Modificar;
     private com.toedter.calendar.JDateChooser jdc_born;
     private javax.swing.JRadioButton rb_f;
     private javax.swing.JRadioButton rb_m;
     private javax.swing.JRadioButton rb_x;
     private javax.swing.JDialog registro;
+    private javax.swing.JSpinner sp_Weight;
     private javax.swing.JTextArea ta_obs;
     private javax.swing.JTextField tf_MapaMental;
     private javax.swing.JTextField tf_Nombre_MapaMental;
     private javax.swing.JTextField tf_Palabra;
+    private javax.swing.JTextField tf_PalabraMod;
     private javax.swing.JTextField tf_Perfil_Seleccionado;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_nodo_actual;
     private javax.swing.JTextField tf_race;
     // End of variables declaration//GEN-END:variables
 ArrayList<Perfil> perfiles = new ArrayList<Perfil>();
+    ArrayList AristasVer = new ArrayList();
     Perfil nodo_actual;
     Graph Arbol = new SingleGraph("Arbol Genealogico");
     int contador = 0;
@@ -910,7 +1169,7 @@ ArrayList<Perfil> perfiles = new ArrayList<Perfil>();
     Perfil Padre_Perfil;
     Viewer viewer;
     Perfil MainMapaMental;
-    
+
     public Graph graphAdd_Perfil(Graph grafo) {
         for (int i = 0; i < perfiles.size(); i++) {
             try {
